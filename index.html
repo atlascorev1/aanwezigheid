@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Aanwezigheid</title>
+  <meta name="theme-color" content="#F7F5F5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141012" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Aanwezig">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self' blob: data:; style-src 'self'; script-src 'self'; connect-src 'self'; form-action 'none'; base-uri 'none'">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <div class="update-bar" id="update" hidden>
+    Nieuwe versie beschikbaar. <button type="button">Vernieuwen</button>
+  </div>
+  <main id="view" class="content"><p class="empty">Laden…</p></main>
+  <noscript>Deze app heeft JavaScript nodig.</noscript>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
+

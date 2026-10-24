@@ -1,0 +1,288 @@
+/* ---------- tokens ---------- */
+/* Copied from src/AttendanceApp/static/app.css (palette "red means absent"); keep the two in step.
+   Light on :root; dark in both the media query and [data-theme="dark"]. */
+:root {
+  --brand: #C6002A;          /* Avans red: absent */
+  --brand-hover: #A30023;
+  --brand-text: #9E0022;
+  --brand-soft: #FBEAED;
+  --on-brand: #FFFFFF;
+
+  --action: #1C1718;         /* primary buttons */
+  --action-hover: #3A3234;
+  --on-action: #FFFFFF;
+
+  --bg: #F7F5F5;
+  --surface: #FFFFFF;
+  --surface-2: #F2EFEF;
+  --text: #1C1718;
+  --muted: #5E5658;
+  --line: #E5DFE0;
+  --line-strong: #8E8487;   /* control borders >= 3:1 */
+  --focus: #C6002A;
+
+  --present: #2E2729;   --on-present: #FFFFFF;   --present-text: #1C1718;
+  --absent: #C6002A;    --on-absent: #FFFFFF;    --absent-text: #9E0022;
+  --reported: #A8500A;  --on-reported: #FFFFFF;  --reported-text: #874006;
+  --other: #2F55B8;     --on-other: #FFFFFF;     --other-text: #2A4CA3;
+
+  --warning-soft: #FDF1E3;
+  --shadow-float: 0 8px 24px rgba(28, 23, 24, .16);
+
+  --s1: 4px; --s2: 8px; --s3: 16px; --s4: 24px; --s5: 32px; --s6: 48px; --s7: 64px;
+  --fs-xs: .8125rem; --fs-sm: .875rem; --fs-md: 1rem; --fs-lg: 1.125rem; --fs-xl: 1.75rem; --fs-xxl: 2.25rem;
+  --r-xs: 2px; --r-sm: 6px; --r: 10px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --brand-text: #FF7A8E;
+    --brand-soft: rgba(198, 0, 42, .22);
+    --action: #F0EBEC; --action-hover: #D9D1D3; --on-action: #141012;
+    --bg: #141012;
+    --surface: #1C1719;
+    --surface-2: #251F21;
+    --text: #F0EBEC;
+    --muted: #A99FA2;
+    --line: #342C2F;
+    --line-strong: #7A6F72; --focus: #FF7A8E;
+    --present: #CFC6C8;   --on-present: #141012;   --present-text: #F0EBEC;
+    --absent: #D92B47;    --on-absent: #FFFFFF;    --absent-text: #FF7A8E;
+    --reported: #B85E12;  --on-reported: #FFFFFF;  --reported-text: #F8C27A;
+    --other: #4167C9;     --on-other: #FFFFFF;     --other-text: #AFC3FF;
+    --warning-soft: rgba(184, 94, 18, .22);
+    --shadow-float: 0 8px 24px rgba(0, 0, 0, .5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --brand-text: #FF7A8E; --brand-soft: rgba(198, 0, 42, .22);
+  --action: #F0EBEC; --action-hover: #D9D1D3; --on-action: #141012;
+  --bg: #141012; --surface: #1C1719; --surface-2: #251F21; --text: #F0EBEC; --muted: #A99FA2;
+  --line: #342C2F; --line-strong: #7A6F72; --focus: #FF7A8E;
+  --present: #CFC6C8; --on-present: #141012; --present-text: #F0EBEC;
+  --absent: #D92B47; --on-absent: #FFFFFF; --absent-text: #FF7A8E;
+  --reported: #B85E12; --on-reported: #FFFFFF; --reported-text: #F8C27A;
+  --other: #4167C9; --on-other: #FFFFFF; --other-text: #AFC3FF;
+  --warning-soft: rgba(184, 94, 18, .22);
+  --shadow-float: 0 8px 24px rgba(0, 0, 0, .5);
+  color-scheme: dark;
+}
+
+/* ---------- base ---------- */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Helvetica Neue", sans-serif;
+  font-size: var(--fs-md);
+  line-height: 1.5;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+a { color: var(--brand-text); text-underline-offset: 2px; }
+h1 { font-size: var(--fs-xl); font-weight: 700; letter-spacing: -.015em; margin: 0; line-height: 1.2; }
+h2 { font-size: var(--fs-lg); font-weight: 650; margin: 0 0 var(--s2); }
+p { margin: 0 0 var(--s3); }
+.muted { color: var(--muted); }
+.small { font-size: var(--fs-sm); }
+.hidden { display: none !important; }
+
+.content {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: calc(var(--s3) + env(safe-area-inset-top)) max(var(--s3), env(safe-area-inset-right))
+           0 max(var(--s3), env(safe-area-inset-left));
+}
+
+.page-header { margin: var(--s2) 0 var(--s4); }
+.page-header p { margin: var(--s1) 0 0; }
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.back::before { content: "‹"; font-size: 1.5em; line-height: 1; margin-right: var(--s1); }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: var(--s3);
+  margin-bottom: var(--s3);
+}
+.stack { display: grid; gap: var(--s3); }
+.empty { padding: var(--s4) 0; color: var(--muted); }
+.footnote { margin: var(--s4) 0; padding-bottom: env(safe-area-inset-bottom); }
+
+/* ---------- lists ---------- */
+.plain-list { list-style: none; margin: 0; padding: 0; }
+.plain-list > li + li { border-top: 1px solid var(--line); }
+.list-link {
+  display: grid;
+  gap: 2px;
+  min-height: 44px;
+  padding: var(--s2) 0;
+  color: inherit;
+  text-decoration: none;
+}
+.student-name { font-weight: 650; }
+.alert-row { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); padding: var(--s2) 0; }
+
+/* ---------- forms ---------- */
+label { font-weight: 600; font-size: var(--fs-sm); }
+.field { display: grid; gap: var(--s1); }
+input, select, button, .button { font: inherit; }
+
+input[type="text"], input[type="date"], input[type="number"], select {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: var(--s2) var(--s3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  color: var(--text);
+  font-size: var(--fs-md);   /* 16 px: iOS does not zoom in on focus */
+  font-weight: 400;
+  -webkit-appearance: none;
+  appearance: none;
+}
+select { -webkit-appearance: menulist; appearance: auto; }
+input:focus, select:focus { outline: 2px solid var(--focus); outline-offset: 0; border-color: var(--focus); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* ---------- buttons ---------- */
+button, .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  min-height: 44px;
+  padding: var(--s2) var(--s3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  line-height: 1.25;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+button:active, .button:active { background: var(--line); }
+.primary { background: var(--action); border-color: var(--action); color: var(--on-action); }
+.primary:active { background: var(--action-hover); }
+.large { min-height: 48px; padding: var(--s2) var(--s4); font-size: var(--fs-md); }
+.link-button { min-height: 44px; border: 0; background: none; color: var(--brand-text); padding: 0; justify-self: start; }
+.link-button:active { background: none; }
+
+.file-button { position: relative; overflow: hidden; }
+.file-button input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+/* ---------- attendance ---------- */
+.student-row { padding: var(--s3) 0; }
+.student-row:first-child { padding-top: 0; }
+.student-row .student-name { margin-bottom: var(--s2); }
+.status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
+@media (min-width: 520px) { .status-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.status-option { display: block; position: relative; font-weight: 600; }
+.status-option input { position: absolute; opacity: 0; pointer-events: none; }
+.status-option span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: var(--s1) var(--s2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  color: var(--muted);
+  text-align: center;
+  font-size: var(--fs-sm);
+  line-height: 1.2;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.status-option input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 2px; }
+.status-present input:checked + span { background: var(--present); border-color: var(--present); color: var(--on-present); }
+.status-absent input:checked + span { background: var(--absent); border-color: var(--absent); color: var(--on-absent); }
+.status-reported_absent input:checked + span { background: var(--reported); border-color: var(--reported); color: var(--on-reported); }
+.status-other input:checked + span { background: var(--other); border-color: var(--other); color: var(--on-other); }
+.note-input { margin-top: var(--s2); }
+
+.students { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: var(--s3); }
+
+.savebar {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  gap: var(--s2);
+  margin: var(--s3) calc(-1 * var(--s3)) 0;
+  padding: var(--s3) var(--s3) calc(var(--s3) + env(safe-area-inset-bottom));
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+.savebar > * { flex: 1 1 0; }
+
+.teams-list { list-style: none; margin: 0; padding: 0; }
+.teams-list li { padding: var(--s3) 0; border-top: 1px solid var(--line); }
+.teams-actions { display: grid; gap: var(--s1); margin-top: var(--s2); }
+.teams-actions .button { width: 100%; }
+.opened:empty { display: none; }
+
+/* ---------- messages ---------- */
+.notice, .flash {
+  margin-bottom: var(--s3);
+  padding: var(--s3);
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+}
+.notice, .flash-error { background: var(--brand-soft); }
+.flash-warning { background: var(--warning-soft); }
+.flash-success { border-left: 3px solid var(--present); }
+
+.update-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s3);
+  padding: calc(var(--s2) + env(safe-area-inset-top)) var(--s3) var(--s2);
+  background: var(--action);
+  color: var(--on-action);
+  font-size: var(--fs-sm);
+}
+.update-bar[hidden] { display: none; }
+
+/* ---------- tags ---------- */
+/* Square outline, no fill, sentence case: same as the Mac app. */
+.pill, .badge {
+  display: inline-block;
+  padding: 0 var(--s1);
+  border: 1px solid currentColor;
+  border-radius: var(--r-xs);
+  background: none;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  vertical-align: 1px;
+}
+.badge { color: var(--muted); }
+.pill-absent { color: var(--absent-text); }
+
